@@ -1,0 +1,58 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>搜索商品</title>
+    <th:block th:include="include :: pccomhead" />
+</head>
+
+<body>
+    <header>
+        <th:block th:include="include :: pchead" />
+        <th:block th:include="include :: pcmenu3" />
+    </header>
+<!-- header end -->
+<section class="shop-list-v3-page">
+    <div class="container">
+        <div class="heading-sub">
+            <h3 class="pull-left">搜索页面</h3>
+            <ul class="other-link-sub pull-right">
+                <li><a href="/index"></a></li>
+                <li><a class="active" th:text="${sName}"></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div class="widget-product-list">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="filter-block bd">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="box box-view" >
+                                    <span>一共为您找到 [[${goodsCount}]] 件商品</span>
+                                    <div class="button-view">
+                                        <span class="col"><i class="ion-ios-keypad fa-3a"></i></span>
+                                        <span class="list"><i class="icon-grid-4"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <th:block th:include="include :: goodsList" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <th:block th:include="include :: features" />
+    <th:block th:include="include :: pcfooter" />
+<script type="text/javascript" src="../../assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../assets/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="../../assets/js/slick.min.js"></script>
+<script type="text/javascript" src="../../assets/js/bootstrap-slider.min.js"></script>
+<script type="text/javascript" src="../../assets/js/main.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('商品管理列表')" />
+    <th:block th:include="include :: pccomhead" />
+</head>
+<body class="gray-bg">
+    <header>
+        <th:block th:include="include :: pchead" />
+    </header>
+    <div class="container">
+        <div class="heading-sub">
+            <div>
+                <a class="active" href="/pc/personInfo">个人信息</a>
+                <a class="active" href="/pc/goods">我的商品</a>
+                <a class="active" href="/pc/myBuyOrder.html">我的订单(买)</a>
+                <a class="active" href="/pc/mySeOrder.html">我的订单(卖)</a>
+            </div>
+            <ul class="other-link-sub pull-right">
+                <li><a href="/">主页</a></li>
+                <li><a class="active" href="/pc/goods">我的商品</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+     <div class="container-div">
+        <div class="row">
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: features" />
+    <th:block th:include="include :: pcfooter" />
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:goods:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:goods:remove')}]];
+        var prefix = ctx + "pc/goods";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "商品管理",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'id',
+                    title: '商品ID',
+                    visible: false
+                },
+                {
+                    field: 'goodsName',
+                    title: '商品名称'
+                },
+                {
+                    field: 'price',
+                    title: '价格'
+                },
+                {
+                    field: 'originalPrice',
+                    title: '原价格'
+                },
+                {
+                    field: 'goodsDetail',
+                    title: '描述'
+                },
+                {
+                    field: 'goodsNumber',
+                    title: '数量'
+                },
+                {
+                    field: 'jbStatus',
+                    title: '标记',
+                    formatter: function (value, row, index) {
+                        if (value==1){
+                            return "精选";
+                        }else if(value==2){
+                            return "白菜";
+                        }else{
+                            return "正常";
+                        }
+                    }
+                },
+                {
+                    field: 'sellStatus',
+                    title: '状态',
+                    formatter: function (value, row, index) {
+                        if (value==1){
+                            return "已售";
+                        }else{
+                            return "待售";
+                        }
+                    }
+
+                },
+                {
+                    field: 'remark',
+                    title: '备注'
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

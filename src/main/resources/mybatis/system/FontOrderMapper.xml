@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jdhs.project.system.order.mapper.FontOrderMapper">
+    
+    <resultMap type="FontOrder" id="FontOrderResult">
+        <result property="id"    column="id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="goodsId"    column="goods_id"    />
+        <result property="sellerName"    column="seller_name"    />
+        <result property="sellerId"    column="seller_id"    />
+        <result property="buyName"    column="buy_name"    />
+        <result property="buyId"    column="buy_id"    />
+        <result property="expressId"    column="express_id"    />
+        <result property="expressName"    column="express_name"    />
+        <result property="expressPrice"    column="express_price"    />
+        <result property="goodsImg"    column="goods_img"    />
+        <result property="buyCount"    column="buy_count"    />
+        <result property="goodsPrice"    column="goods_price"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="expressNum"    column="express_num"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFontOrderVo">
+        select id, order_id, order_num, goods_id, seller_name, seller_id, buy_name, buy_id, express_id, express_name, express_price, goods_img, buy_count, goods_price, goods_name, order_status, express_num, del_flag, create_by, create_time, update_by, update_time, remark from font_order
+    </sql>
+
+    <select id="selectFontOrderList" parameterType="FontOrder" resultMap="FontOrderResult">
+        <include refid="selectFontOrderVo"/>
+        <where>  
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="orderNum != null  and orderNum != ''"> and order_num = #{orderNum}</if>
+            <if test="goodsId != null "> and goods_id = #{goodsId}</if>
+            <if test="sellerName != null  and sellerName != ''"> and seller_name like concat('%', #{sellerName}, '%')</if>
+            <if test="sellerId != null "> and seller_id = #{sellerId}</if>
+            <if test="buyName != null  and buyName != ''"> and buy_name like concat('%', #{buyName}, '%')</if>
+            <if test="buyId != null "> and buy_id = #{buyId}</if>
+            <if test="expressId != null "> and express_id = #{expressId}</if>
+            <if test="expressName != null  and expressName != ''"> and express_name like concat('%', #{expressName}, '%')</if>
+            <if test="expressPrice != null "> and express_price = #{expressPrice}</if>
+            <if test="goodsImg != null  and goodsImg != ''"> and goods_img = #{goodsImg}</if>
+            <if test="buyCount != null "> and buy_count = #{buyCount}</if>
+            <if test="goodsPrice != null "> and goods_price = #{goodsPrice}</if>
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="expressNum != null  and expressNum != ''"> and express_num = #{expressNum}</if>
+        </where>
+    </select>
+    
+    <select id="selectFontOrderById" parameterType="Long" resultMap="FontOrderResult">
+        <include refid="selectFontOrderVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFontOrder" parameterType="FontOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into font_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="goodsId != null">goods_id,</if>
+            <if test="sellerName != null">seller_name,</if>
+            <if test="sellerId != null">seller_id,</if>
+            <if test="buyName != null">buy_name,</if>
+            <if test="buyId != null">buy_id,</if>
+            <if test="expressId != null">express_id,</if>
+            <if test="expressName != null">express_name,</if>
+            <if test="expressPrice != null">express_price,</if>
+            <if test="goodsImg != null">goods_img,</if>
+            <if test="buyCount != null">buy_count,</if>
+            <if test="goodsPrice != null">goods_price,</if>
+            <if test="goodsName != null">goods_name,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="expressNum != null">express_num,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="goodsId != null">#{goodsId},</if>
+            <if test="sellerName != null">#{sellerName},</if>
+            <if test="sellerId != null">#{sellerId},</if>
+            <if test="buyName != null">#{buyName},</if>
+            <if test="buyId != null">#{buyId},</if>
+            <if test="expressId != null">#{expressId},</if>
+            <if test="expressName != null">#{expressName},</if>
+            <if test="expressPrice != null">#{expressPrice},</if>
+            <if test="goodsImg != null">#{goodsImg},</if>
+            <if test="buyCount != null">#{buyCount},</if>
+            <if test="goodsPrice != null">#{goodsPrice},</if>
+            <if test="goodsName != null">#{goodsName},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="expressNum != null">#{expressNum},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFontOrder" parameterType="FontOrder">
+        update font_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="goodsId != null">goods_id = #{goodsId},</if>
+            <if test="sellerName != null">seller_name = #{sellerName},</if>
+            <if test="sellerId != null">seller_id = #{sellerId},</if>
+            <if test="buyName != null">buy_name = #{buyName},</if>
+            <if test="buyId != null">buy_id = #{buyId},</if>
+            <if test="expressId != null">express_id = #{expressId},</if>
+            <if test="expressName != null">express_name = #{expressName},</if>
+            <if test="expressPrice != null">express_price = #{expressPrice},</if>
+            <if test="goodsImg != null">goods_img = #{goodsImg},</if>
+            <if test="buyCount != null">buy_count = #{buyCount},</if>
+            <if test="goodsPrice != null">goods_price = #{goodsPrice},</if>
+            <if test="goodsName != null">goods_name = #{goodsName},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="expressNum != null">express_num = #{expressNum},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFontOrderById" parameterType="Long">
+        delete from font_order where id = #{id}
+    </delete>
+
+    <delete id="deleteFontOrderByIds" parameterType="String">
+        delete from font_order where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

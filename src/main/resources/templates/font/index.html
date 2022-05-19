@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <th:block th:include="include :: datetimepicker-css" />
+    <head>
+        <meta charset="utf-8" />
+        <title>家电回收平台</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+        <link href="../../assets/metronic/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="../../assets/metronic/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="../../assets/metronic/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="../../assets/metronic/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <link href="../../assets/metronic/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="../../assets/metronic/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- END PAGE LEVEL PLUGINS -->
+        <!-- BEGIN THEME GLOBAL STYLES -->
+        <link href="../../assets/metronic/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+        <link href="../../assets/metronic/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+        <!-- END THEME GLOBAL STYLES -->
+        <!-- BEGIN PAGE LEVEL STYLES -->
+        <link href="../../assets/metronic/pages/css/login-4.min.css" rel="stylesheet" type="text/css" />
+        <!-- END PAGE LEVEL STYLES -->
+        <!-- BEGIN THEME LAYOUT STYLES -->
+        <!-- END THEME LAYOUT STYLES -->
+        <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+        <link rel="stylesheet" href="../../assets/css/font-awesome.css">
+        <link rel="stylesheet" href="../../assets/css/ionicons.min.css">
+        <link rel="stylesheet" href="../../assets/css/slick.css">
+        <link rel="stylesheet" href="../../assets/css/slick-theme.css">
+        <link rel="stylesheet" href="../../assets/css/bootstrap-slider.css">
+        <link rel="stylesheet" href="../../assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="../../assets/css/style.css">
+        <script type="text/javascript" src="/assets/js/jquery.js"></script>
+        <link rel="shortcut icon" href="favicon.ico" />
+    </head>
+    <!-- END HEAD -->
+
+<body>
+    <header>
+        <th:block th:include="include :: pchead" />
+        <th:block th:include="include :: pcmenu1" />
+    </header>
+
+<!--    <div th:replace="allheader::head"></div>-->
+    <section class="slide">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="row top-row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="single-item js-banner">
+                                <div class="slide-img" th:each="banner:${banners}">
+                                    <img th:src="${banner.img1}" alt="images" class="img-reponsive">
+                                    <div class="slide-content">
+                                        <h3><span class="strong"></span></h3>
+                                        <p></p>
+                                    </div>
+                                    <a href="/pc/goodsDetail/8" class="slide-button">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bigdeal">
+        <div class="container">
+            <div class="label label-1">白菜价</div>
+            <div class="sale-list">
+                <div class="row">
+                    <div class="col-md-7 col-sm-12">
+                        <div class="product-item ver4 top-inner" th:each="cheapers:${cheaper}" th:if="${cheapers.id == 1}">
+                            <div class="prod-item-img">
+                                <a th:href="@{'/pc/goodsDetail/'+${cheapers.id}}">
+                                    <img th:src="${cheapers.picture1}" style="width: 300px;height: 300px" alt="images" class="img-reponsive"></a>
+                                <div class="prod-choose">
+                                    <div class="prod-color">
+                                        <span class="dot"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <div class="prod-price">
+                                        <span class="price old">￥[[${cheapers.originalPrice}]]</span>
+                                        <span class="price-ver2 price-lg">￥[[${cheapers.price}]]</span>
+                                        <span class="productPriceDiscount">直降<br><span class="strong" th:text="${cheapers.originalPrice}-${cheapers.price}"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="prod-info">
+                                <h3><a class="prod-name" th:href="@{'/pc/goodsDetail/'+${cheapers.id}}" title="">[[${cheapers.goodsName}]]</a></h3>
+                                <div class="prod-description">
+                                    <span>[[${cheapers.goodsDetail}]]</span>
+                                </div>
+                                <div class="countdown" data-countdown="countdown" data-date="5-25-2020-00-00-00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12 ">
+                        <div class="product-item ver1 padding--bottom margin-r" th:each="cheapers:${cheaper}" th:if="${cheapers.id == 4}">
+                            <div class="prod-item-img set--width">
+                                <a class="image" th:href="@{'/pc/goodsDetail/'+${cheapers.id}}">
+                                    <img th:src="${cheapers.picture1}" style="width: 220px;height: 220px" alt="images" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="prod-info ver1">
+                                <h3><a th:href="@{'/pc/goodsDetail/'+${cheapers.id}}" title="">[[${cheapers.goodsName}]]</a></h3>
+                                <div class="prod-price">
+                                    <span class="price old">￥[[${cheapers.originalPrice}]]</span>
+                                    <span class="price">￥[[${cheapers.price}]]</span>
+                                </div>
+                            </div>
+                            <div class="label label-2 blue">New</div>
+                        </div>
+                        <div class="product-item ver1 margin-r "  th:each="cheapers:${cheaper}" th:if="${cheapers.id == 5}">
+                            <div class="prod-item-img set--width">
+                                <a class="image" th:href="@{'/pc/goodsDetail/'+${cheapers.id}}"><img th:src="${cheapers.picture1}" alt="images" class="img-responsive"></a>
+                            </div>
+                            <div class="prod-info ver1">
+                                <h3><a th:href="@{'/pc/goodsDetail/'+${cheapers.id}}" title="">[[${cheapers.goodsName}]]</a></h3>
+                                <div class="prod-price">
+                                    <span class="price old">￥[[${cheapers.originalPrice}]]</span>
+                                    <span class="price">￥[[${cheapers.price}]]</span>
+                                </div>
+                            </div>
+                            <div class="label label-2 red">Hot</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-product">
+        <div class="container">
+            <div class="heading-v1">
+                <h3 class="pull-left">精选好货</h3>
+                <ul class="otherr-link pull-right">
+                    <li class="active"><a data-toggle="pill" href="#all">所有</a></li>
+                    <li><a data-toggle="pill" href="#elec">手机</a></li>
+                    <li><a data-toggle="pill" href="#fashion">数码</a></li>
+                    <li><a data-toggle="pill" href="#it">图书</a></li>
+                    <li><a data-toggle="pill" href="#food">服饰</a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="tab-content">
+                <div id="all" class="tab-pane fade in active">
+                    <div class="prod-fea-list">
+                        <div class="row" >
+                            <div class="col-md-15 col-sm-4 col-xs-6" th:each="goods:${chosen}">
+                                <input type="hidden" name="sellerId" th:id="${'sellerId'+goods.id}" th:value="${goods.sellerId}"/>
+                                <div class="product-item ver2" >
+                                    <div class="prod-item-img bd-style-2">
+                                        <a th:href="@{'/pc/goodsDetail/'+${goods.id}}">
+                                            <img th:src="${goods.picture1}" style="height: 210px;width: 210px" alt="images" class="img-responsive"></a>
+                                        <div class="button">
+                                            <a href="javascript:void(0);"  class="addcart" th:onclick="'addToCart('+${goods.id}+')'">添加到购物车</a>
+                                            <a th:href="${goods.picture1}" class="view"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="prod-info">
+                                        <h3><a href="#">[[${goods.goodsName}]]</a></h3>
+                                        <div class="prod-price">
+                                            <span class="price">[[${goods.price}]]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="elec" class="tab-pane fade " >
+                    <div class="prod-fea-list">
+                        <div class="row">
+                            <div class="col-md-15 col-sm-4 col-xs-6" th:each="phoneSel:${chosen}" th:if="${phoneSel.categoryId == 1}">
+                                <div class="product-item ver2" >
+                                    <div class="prod-item-img bd-style-2">
+                                        <a th:href="@{'/pc/goodsDetail/'+${phoneSel.id}}"><img th:src="${phoneSel.picture1}" alt="images" class="img-responsive"></a>
+                                        <div class="button">
+                                            <a href="#" class="addcart" th:onclick="'addToCart('+${phoneSel.id}+')'">添加到购物车</a>
+                                            <a th:href="${phoneSel.picture1}" class="view"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="prod-info">
+                                        <h3><a th:href="@{'/pc/goodsDetail/'+${phoneSel.id}}">[[${phoneSel.goodsName}]]</a></h3>
+                                        <div class="prod-price">
+                                            <span class="price">￥[[${phoneSel.price}]]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="fashion" class="tab-pane fade " >
+                    <div class="prod-fea-list">
+                        <div class="row">
+                            <div class="col-md-15 col-sm-4 col-xs-6" th:each="fashion:${chosen}" th:if="${fashion.categoryId == 2}">
+                                <div class="product-item ver2" >
+                                    <div class="prod-item-img bd-style-2">
+                                        <a th:href="@{'/pc/goodsDetail/'+${fashion.id}}"><img th:src="${fashion.picture1}" alt="images" class="img-responsive"></a>
+                                        <div class="button">
+                                            <a href="#" class="addcart" th:onclick="'addToCart('+${fashion.id}+')'">添加到购物车</a>
+                                            <a th:href="${fashion.picture1}" class="view"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="prod-info">
+                                        <h3><a th:href="@{'/pc/goodsDetail/'+${fashion.id}}">[[${fashion.goodsName}]]</a></h3>
+                                        <div class="prod-price">
+                                            <span class="price">￥[[${fashion.price}]]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="it" class="tab-pane fade " >
+                    <div class="prod-fea-list">
+                        <div class="row">
+                            <div class="col-md-15 col-sm-4 col-xs-6" th:each="it:${chosen}" th:if="${it.categoryId == 3}">
+                                <div class="product-item ver2" >
+                                    <div class="prod-item-img bd-style-2">
+                                        <a th:href="@{'/pc/goodsDetail/'+${it.id}}"><img th:src="${it.picture1}" alt="images" class="img-responsive"></a>
+                                        <div class="button">
+                                            <a href="#" class="addcart" th:onclick="'addToCart('+${it.id}+')'">添加到购物车</a>
+                                            <a th:href="${it.picture1}" class="view"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="prod-info">
+                                        <h3><a th:href="@{'/pc/goodsDetail/'+${it.id}}">[[${it.goodsName}]]</a></h3>
+                                        <div class="prod-price">
+                                            <span class="price">￥[[${it.price}]]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="food" class="tab-pane fade " >
+                    <div class="prod-fea-list">
+                        <div class="row">
+                            <div class="col-md-15 col-sm-4 col-xs-6" th:each="food:${chosen}" th:if="${food.categoryId == 5}">
+                                <div class="product-item ver2" >
+                                    <div class="prod-item-img bd-style-2">
+                                        <a th:href="@{'/pc/goodsDetail/'+${food.id}}"><img th:src="${food.picture1}" alt="images" class="img-responsive"></a>
+                                        <div class="button">
+                                            <a href="#" class="addcart" th:onclick="'addToCart('+${food.id}+')'">添加到购物车</a>
+                                            <a th:href="${food.picture1}" class="view"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="prod-info">
+                                        <h3><a th:href="@{'/pc/goodsDetail/'+${food.id}}">[[${food.goodsName}]]</a></h3>
+                                        <div class="prod-price">
+                                            <span class="price">￥[[${food.price}]]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- END LOGIN -->
+        <!-- BEGIN COPYRIGHT -->
+        <div class="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12 fea-column-inner">
+                        <div class="fea-box">
+                            <div class="photo">
+                                <img src="/assets/img/gift.png" alt="images" class="img-reponsive">
+                            </div>
+                            <p class="inform-ver2">
+                                <span class="strong">今天的订单<br></span> 看看今天的交易
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 fea-column-inner">
+                        <div class="fea-box">
+                            <div class="photo">
+                                <img src="/assets/img/fly.png" alt="images" class="img-reponsive">
+                            </div>
+                            <p class="inform-ver2">
+                                <span class="strong">运费优惠<br></span> 上千种商品
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 fea-column-inner">
+                        <div class="fea-box">
+                            <div class="photo">
+                                <img src="/assets/img/return.png" alt="images" class="img-reponsive">
+                            </div>
+                            <p class="inform-ver2">
+                                <span class="strong">简便退换 <br></span> 所有出售的商品
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 fea-column-inner">
+                        <div class="fea-box">
+                            <div class="photo">
+                                <img src="/assets/img/secu.png" alt="images" class="img-reponsive">
+                            </div>
+                            <p class="inform-ver2">
+                                <span class="strong">更好的服务<br></span> 以最好的服务为荣
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="top-footer">
+                <div class="container">
+                    <h1 class="heading-default">更好信誉的卖家和买家</h1>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 block-left">
+                            <div class="block-footer">
+                                <h2 class="heading-primary">最新消息</h2>
+                                <p class="description-primary">
+
+                                </p>
+                            </div>
+                            <div class="block-footer">
+                                <h2 class="heading-primary">手机和平板电脑</h2>
+                                <p class="description-primary">
+
+                                </p>
+                            </div>
+                            <div class="block-footer no-padding-bottom">
+                                <h2 class="heading-primary">电脑和笔记本电脑</h2>
+                                <p class="description-primary">
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 block-right">
+                            <div class="block-footer">
+                                <h2 class="heading-primary">电子产品</h2>
+                                <p class="description-primary">
+
+                                </p>
+                            </div>
+                            <div class="block-footer">
+                                <h2 class="heading-primary">时尚</h2>
+                                <p class="description-primary">
+
+                                </p>
+                            </div>
+                            <div class="block-footer no-padding-bottom">
+                                <h2 class="heading-primary">安全与方便</h2>
+                                <p class="description-primary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <span>© <a href="#" title="">闲闲二手交易网站</a> - All Rights Reserved.</span>
+                    <ul class="payment">
+                        <li><a href="#"><img src="../../assets/img/paypal.png" alt="images" class="img-responsive"></a></li>
+                        <li><a href="#"><img src="../../assets/img/visa.png" alt="images" class="img-responsive"></a></li>
+                        <li><a href="#"><img src="../../assets/img/american.png" alt="images" class="img-responsive"></a></li>
+                        <li><a href="#"><img src="../../assets/img/mastercard.png" alt="images" class="img-responsive"></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </footer>
+        <!-- END COPYRIGHT -->
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+        <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+        <script th:src="@{/js/jquery.contextMenu.min.js}"></script>
+        <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+        <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+        <script th:src="@{/ruoyi/js/ry-ui.js?v=4.7.3}"></script>
+        <script th:src="@{/ruoyi/js/common.js?v=4.7.3}"></script>
+        <script th:src="@{/ruoyi/index.js?v=20201208}"></script>
+        <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+
+        <script type="application/javascript">
+            $(function(){
+                console.log(storage.get("hstoken")+"---------首页打印----");
+                //获取用户信息
+                $.ajax({
+                    type: "post",
+                    dataType: "JSON",
+                    headers: {"token": storage.get("hstoken")},
+                    contentType: "application/json;charset=UTF-8",
+                    url: "/pc/getuserInfo?token="+storage.get("hstoken"),
+                    data: {},
+                    success: function(res) {
+                        if(res.code == 0){
+                            storage.get("pcUserInfo",res.data)
+                        }else {
+                            $.modal.msg(res.msg);
+                            $.modal.closeLoading();
+                        }
+
+                    }
+                });
+            });
+
+        </script>
+    </body>
+
+</html>

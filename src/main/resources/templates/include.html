@@ -1,0 +1,572 @@
+<!-- 通用CSS -->
+<head th:fragment=header(title)>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title th:text="${title}"></title>
+	<link th:href="@{/css/bootstrap.min.css?v=3.3.7}" rel="stylesheet"/>
+	<link th:href="@{/css/font-awesome.min.css?v=4.7.3}" rel="stylesheet"/>
+	<!-- bootstrap-table 表格插件样式 -->
+	<link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css?v=1.18.3}" rel="stylesheet"/>
+	<link th:href="@{/css/animate.min.css?v=20210831}" rel="stylesheet"/>
+	<link th:href="@{/css/style.min.css?v=20210831}" rel="stylesheet"/>
+	<link th:href="@{/ruoyi/css/ry-ui.css?v=4.7.3}" rel="stylesheet"/>
+</head>
+<div th:fragment="pccomhead">
+	<link rel="stylesheet" href="../../assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../../assets/css/font-awesome.css">
+	<link rel="stylesheet" href="../../assets/css/ionicons.min.css">
+	<link rel="stylesheet" href="../../assets/css/slick.css">
+	<link rel="stylesheet" href="../../assets/css/slick-theme.css">
+	<link rel="stylesheet" href="../../assets/css/bootstrap-slider.css">
+	<link rel="stylesheet" href="../../assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="../../assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet">
+	<script type="text/javascript" src="../../assets/js/jquery.js"></script>
+</div>
+<div th:fragment="goodsList">
+	<div class="product-list">
+		<div class="product-list grid_full grid_sidebar grid-uniform" style="min-width: 1170px">
+			<div class="product-list-item" th:each="goods:${search}">
+				<div class="product-item-img">
+					<a th:href="@{'/pc/goodsDetail/'+${goods.id}}"><img th:src="${goods.picture1}" style="width: 230px;height: 270px" alt="images" class="img-responsive"></a>
+					<div class="label label-2 red label-top-20"></div>
+				</div>
+				<div class="product-item-info">
+					<h3><a th:href="@{'/pc/goodsDetail/'+${goods.id}}" title="">[[${goods.goodsName}]]</a></h3>
+					<div class="prod-price">
+						<span class="price black">[[${goods.price}]]</span>
+					</div>
+					<p>[[${goods.goodsDetail}]]</p>
+				</div>
+			</div>
+		</div>
+		<div class="product-pagination" >
+			<div th:if="${goodsCount == 0}">
+				<h3>暂无收录相关商品</h3>
+			</div>
+		</div>
+	</div>
+
+</div>
+<div th:fragment="pchead">
+		<div class="top-nav hidden-xs hidden-sm">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7 col-sm-7 col-xs-12">
+						<div class="right-nav">
+							<ul th:if="${user == null}">
+								<li><a href="/register.html"><i class="ion-ios-personadd fa-1a" aria-hidden="true" style="color: #00aaaa" ></i>创建账户</a></li>
+								<li><a href="/pclogin.html"><i class="ion-log-in fa-1a" aria-hidden="true" style="color: #00d95a"></i>登录</a></li>
+							</ul>
+							<ul th:if="${user != null}">
+								<li><a th:href="@{'/pc/personInfo'}"><i class="fa fa-user" aria-hidden="true" style="color: #0a6aa1"></i>[[${user.userName}]]</a></li>
+								<li><a th:href="@{'/pc/logout.html'}" ><i class="fa fa-remove" aria-hidden="true" style="color: #e02222"></i>登出</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-8 col-xs-7 logo">
+						<a href="/" title="Clickbuy"><img src="/assets/xximg/title.jpg" alt="images" class="img-reponsive"></a>
+					</div>
+					<div class="col-md-9 col-sm-4 col-xs-5 nextlogo">
+						<div class="block block-2">
+
+						</div>
+						<div class="block block-1">
+							<div class="protect">
+								<div class="photo">
+									<svg width="28" height="33" id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180.05 214.27">
+										<title>security</title>
+										<path d="M196.93,55.17c-.11-5.78-.21-11.25-.21-16.54a7.5,7.5,0,0,0-7.5-7.5c-32.07,0-56.5-9.22-76.85-29a7.5,7.5,0,0,0-10.46,0c-20.35,19.79-44.77,29-76.84,29a7.5,7.5,0,0,0-7.5,7.5c0,5.29-.1,10.76-.22,16.54-1,53.84-2.44,127.57,87.33,158.68a7.49,7.49,0,0,0,4.91,0C199.36,182.74,198,109,196.93,55.17ZM107.13,198.81c-77-28-75.82-89.23-74.79-143.35.06-3.25.12-6.4.16-9.48,30-1.27,54.06-10.37,74.63-28.28,20.57,17.91,44.59,27,74.63,28.28,0,3.08.1,6.23.16,9.48C183,109.58,184.12,170.84,107.13,198.81Z" transform="translate(-17.11 0)" />
+										<path d="M133,81.08l-36.2,36.2L81.31,101.83a7.5,7.5,0,0,0-10.61,10.61l20.75,20.75a7.5,7.5,0,0,0,10.61,0l41.5-41.5A7.5,7.5,0,1,0,133,81.08Z" transform="translate(-17.11 0)" />
+									</svg>
+								</div>
+								<p class="inform">
+									<span class="strong">信息<br></span> 安全
+								</p>
+							</div>
+							<div class="return">
+								<div class="photo">
+									<svg width="30" height="30" id="Capa_2" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612.85">
+										<title>update-arrows</title>
+										<path d="M600.48,221.79c-14.43-50.5-40.14-94.33-77.94-132.13a300.48,300.48,0,0,0-100-66.57C385,7.84,346.58,0,306.78,0V37.47c69.91,0,138.93,27,190,78.28A264.15,264.15,0,0,1,564.7,231.16c12.55,43.87,14.38,88,4.68,132.47A261.77,261.77,0,0,1,509.83,482l-52.18-51.18V558.33l130.13,2-52.18-52.18Q587.78,448.93,604.84,373A301.45,301.45,0,0,0,600.48,221.79Z" transform="translate(-0.43)" />
+										<path d="M47.85,382A267.44,267.44,0,0,1,43.5,249.56,263.58,263.58,0,0,1,103.38,130.8l52.18,51.85V54.53L25.44,53.19l51.85,51.52Q25.11,163.92,8,239.85a301.82,301.82,0,0,0,4.35,151.54c14.34,50.2,40.14,94,77.95,131.81a300.35,300.35,0,0,0,100,66.57,306.59,306.59,0,0,0,116.42,23.08v-36.8a267,267,0,0,1-190.35-78.94C83.54,464.09,60.41,425.9,47.85,382Z" transform="translate(-0.43)" />
+									</svg>
+								</div>
+								<p class="inform">
+									<span class="strong">免费<br></span> 退换
+								</p>
+							</div>
+						</div>
+						<div class="search hidden-xs hidden-sm">
+							<form action="/pc/search.html" class="search-form">
+								<input type="text" name="search" class="form-control" placeholder="在这里搜索">
+								<button type="submit" class="search-icon"></button>
+							</form>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div th:fragment="pcmenu1">
+	<div class="menu">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-4 col-xs-6 column-left">
+					<aside id="column-left">
+						<nav class="navbar-default">
+							<div class="menu-heading js-nav-menu">全部分类</div>
+							<div class="vertical-wrapper js-dropdown-menu js-dropdown-open active">
+								<ul class="level0">
+									<li th:each="category : ${categories}">
+										<a th:href="@{'/pc/catelist.html/'+${category.id}}">[[${category.name}]]</a>
+										<div class="dropdown-content" >
+											<ul class="level1">
+												<li class="sub-menu col-3">
+													<ul class="level2">
+														<li class="col-inner" th:each="categoryTwo : ${categoryTwos}" th:if="${categoryTwo.pid == category.id}"><a th:href="@{'/pc/search.html?search='+${categoryTwo.name}}">[[${categoryTwo.name}]]</a></li>
+													</ul>
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+											<div class="banner">
+												<span></span>
+											</div>
+										</div>
+									</li>
+									<li ><a href="#">更多</a></span></li>
+								</ul>
+							</div>
+						</nav>
+					</aside>
+				</div>
+				<div class="col-md-9 col-sm-8 col-xs-6 column-right">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="menu-title">MENU</span>
+					</button>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="menubar js-menubar">
+							<li class=" menu-homepage menu-item-has-child dropdown">
+								<a href="/" title="/"><i class="fa fa-home"></i>主页</a>
+								<span class="plus js-plus-icon"></span>
+							</li>
+							<li class="menu-collection-page menu-item-has-child dropdown">
+								<a th:href="@{'/pc/subheading.html/2'}" title="new">白菜市场</a>
+							</li>
+							<li class="dropdown menu-blog-page menu-item-has-child">
+								<a th:href="@{'/pc/subheading.html/1'}" title="Blog">精选市场</a>
+							</li>
+							<li class="dropdown menu-blog-page menu-item-has-child">
+								<a th:href="@{'/pc/catelist.html/1'}" title="Blog">二手手机</a>
+							</li>
+							<li class="dropdown menu-blog-page menu-item-has-child">
+								<a th:href="@{'/pc/catelist.html/2'}" title="Blog">二手数码</a>
+							</li>
+							<li class="dropdown menu-blog-page menu-item-has-child">
+								<a th:href="@{'/pc/catelist.html/3'}" title="Blog">二手图书</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div th:fragment="pcmenu3">
+	<div class="menu">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-4 col-xs-6 column-left">
+					<aside id="column-left">
+						<nav class="navbar-default">
+							<div class="menu-heading js-nav-menu">全部分类</div>
+							<div class="vertical-wrapper v3 js-dropdown-menu">
+								<ul class="level0">
+									<li th:each="category : ${categories}">
+										<a th:href="@{'/pc/catelist.html/'+${category.id}}">[[${category.name}]]</a>
+										<div class="dropdown-content" >
+											<ul class="level1">
+												<li class="sub-menu col-3">
+													<ul class="level2">
+														<li class="col-inner" th:each="categoryTwo : ${categoryTwos}" th:if="${categoryTwo.pid == category.id}"><a th:href="@{'/pc/search.html?search='+${categoryTwo.name}}">[[${categoryTwo.name}]]</a></li>
+													</ul>
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+											<div class="banner">
+												<span><img src="img/megamenubanner.png" alt="images" class="img-responsive"></span>
+											</div>
+										</div>
+									</li>
+									<li ><a href="#">更多</a></span></li>
+								</ul>
+							</div>
+						</nav>
+					</aside>
+				</div>
+				<div class="col-md-9 col-sm-8 col-xs-6 column-right">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="menu-title">MENU</span>
+					</button>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="menubar js-menubar">
+							<li class=" menu-homepage menu-item-has-child dropdown">
+								<a href="/" title="home"><i class="fa fa-home"></i>主页</a>
+								<span class="plus js-plus-icon"></span>
+							</li>
+							<li class="menu-collection-page menu-item-has-child dropdown">
+								<a th:href="@{'/pc/subheading.html/2'}" title="new">白菜市场</a>
+							</li>
+							<li class="dropdown menu-blog-page menu-item-has-child">
+								<a th:href="@{'/pc/subheading.html/1'}" title="Blog">精选市场</a>
+							</li>
+							<li class="dropdown menu-blog-page menu-item-has-child">
+								<a th:href="@{'/pc/catelist.html/1'}" title="Blog">二手手机</a>
+							</li>
+							<li class="dropdown menu-blog-page menu-item-has-child">
+								<a th:href="@{'/pc/catelist.html/2'}" title="Blog">二手数码</a>
+							</li>
+							<li class="dropdown menu-blog-page menu-item-has-child">
+								<a th:href="@{'/pc/catelist.html/3'}" title="Blog">二手图书</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<!-- 通用JS -->
+<div th:fragment="footer">
+    <script th:inline="javascript"> var ctx = [[@{/}]]; var lockscreen = [[${session.lockscreen}]]; if(lockscreen){window.top.location=ctx+"lockscreen";} </script>
+    <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
+	<script th:src="@{/js/jquery.min.js?v=3.6.0}"></script>
+	<script th:src="@{/js/bootstrap.min.js?v=3.3.7}"></script>
+	<!-- bootstrap-table 表格插件 -->
+	<script th:src="@{/ajax/libs/bootstrap-table/bootstrap-table.min.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/mobile/bootstrap-table-mobile.js?v=1.18.3}"></script>
+	<!-- jquery-validate 表单验证插件 -->
+	<script th:src="@{/ajax/libs/validate/jquery.validate.min.js?v=1.19.3}"></script>
+	<script th:src="@{/ajax/libs/validate/jquery.validate.extend.js?v=1.19.3}"></script>
+	<script th:src="@{/ajax/libs/validate/messages_zh.js?v=1.19.3}"></script>
+	<!-- bootstrap-table 表格树插件 -->
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/tree/bootstrap-table-tree.min.js?v=1.18.3}"></script>
+	<!-- 遮罩层 -->
+	<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js?v=2.70.0}"></script>
+    <script th:src="@{/ajax/libs/iCheck/icheck.min.js?v=1.0.3}"></script>
+	<script th:src="@{/ajax/libs/layer/layer.min.js?v=3.5.1}"></script>
+	<script th:src="@{/ajax/libs/layui/layui.min.js?v=2.6.8}"></script>
+	<script th:src="@{/ruoyi/js/common.js?v=4.7.3}"></script>
+	<script th:src="@{/ruoyi/js/ry-ui.js?v=4.7.3}"></script>
+</div>
+
+<!-- ztree树插件 -->
+<div th:fragment="ztree-css">
+    <link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="ztree-js">
+    <script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+</div>
+
+<!-- select2下拉框插件 -->
+<div th:fragment="select2-css">
+    <link th:href="@{/ajax/libs/select2/select2.min.css?v=4.0.13}" rel="stylesheet"/>
+    <link th:href="@{/ajax/libs/select2/select2-bootstrap.min.css?v=4.0.13}" rel="stylesheet"/>
+</div>
+<div th:fragment="select2-js">
+    <script th:src="@{/ajax/libs/select2/select2.min.js?v=4.0.13}"></script>
+</div>
+
+<!-- bootstrap-select下拉框插件 -->
+<div th:fragment="bootstrap-select-css">
+    <link th:href="@{/ajax/libs/bootstrap-select/bootstrap-select.min.css?v=1.13.18}" rel="stylesheet"/>
+</div>
+<div th:fragment="bootstrap-select-js">
+    <script th:src="@{/ajax/libs/bootstrap-select/bootstrap-select.min.js?v=1.13.18}"></script>
+</div>
+
+<!-- datetimepicker日期和时间插件 -->
+<div th:fragment="datetimepicker-css">
+    <link th:href="@{/ajax/libs/datapicker/bootstrap-datetimepicker.min.css?v=2.4.4}" rel="stylesheet"/>
+</div>
+<div th:fragment="datetimepicker-js">
+    <script th:src="@{/ajax/libs/datapicker/bootstrap-datetimepicker.min.js?v=2.4.4}"></script>
+</div>
+
+<!-- ui布局插件 -->
+<div th:fragment="layout-latest-css">
+    <link th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css?v=1.4.4}" rel="stylesheet"/>
+</div>
+<div th:fragment="layout-latest-js">
+    <script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js?v=1.4.4}"></script>
+</div>
+
+<!-- summernote富文本编辑器插件 -->
+<div th:fragment="summernote-css">
+    <link th:href="@{/ajax/libs/summernote/summernote.css?v=0.8.18}" rel="stylesheet"/>
+</div>
+<div th:fragment="summernote-js">
+    <script th:src="@{/ajax/libs/summernote/summernote.min.js?v=0.8.18}"></script>
+	<script th:src="@{/ajax/libs/summernote/summernote-zh-CN.js?v=0.8.18}"></script>
+</div>
+
+<!-- cropper图像裁剪插件 -->
+<div th:fragment="cropper-css">
+    <link th:href="@{/ajax/libs/cropper/cropper.min.css?v=1.5.12}" rel="stylesheet"/>
+</div>
+<div th:fragment="cropper-js">
+    <script th:src="@{/ajax/libs/cropper/cropper.min.js?v=1.5.12}"></script>
+</div>
+
+<!-- jasny功能扩展插件 -->
+<div th:fragment="jasny-bootstrap-css">
+    <link th:href="@{/ajax/libs/jasny/jasny-bootstrap.min.css?v=3.1.3}" rel="stylesheet"/>
+</div>
+<div th:fragment="jasny-bootstrap-js">
+    <script th:src="@{/ajax/libs/jasny/jasny-bootstrap.min.js?v=3.1.3}"></script>
+</div>
+
+<!-- fileinput文件上传插件 -->
+<div th:fragment="bootstrap-fileinput-css">
+    <link th:href="@{/ajax/libs/bootstrap-fileinput/fileinput.min.css?v=5.2.4}" rel="stylesheet"/>
+</div>
+<div th:fragment="bootstrap-fileinput-js">
+    <script th:src="@{/ajax/libs/bootstrap-fileinput/fileinput.min.js?v=5.2.4}"></script>
+</div>
+
+<!-- duallistbox双列表框插件 -->
+<div th:fragment="bootstrap-duallistbox-css">
+    <link th:href="@{/ajax/libs/duallistbox/bootstrap-duallistbox.min.css?v=3.0.9}" rel="stylesheet"/>
+</div>
+<div th:fragment="bootstrap-duallistbox-js">
+    <script th:src="@{/ajax/libs/duallistbox/bootstrap-duallistbox.min.js?v=3.0.9}"></script>
+</div>
+
+<!-- suggest搜索自动补全 -->
+<div th:fragment="bootstrap-suggest-js">
+    <script th:src="@{/ajax/libs/suggest/bootstrap-suggest.min.js?v=0.1.29}"></script>
+</div>
+
+<!-- typeahead搜索自动补全 -->
+<div th:fragment="bootstrap-typeahead-js">
+    <script th:src="@{/ajax/libs/typeahead/bootstrap-typeahead.min.js?v=4.0.2}"></script>
+</div>
+
+<!-- 多级联动下拉 -->
+<div th:fragment="jquery-cxselect-js">
+    <script th:src="@{/ajax/libs/cxselect/jquery.cxselect.min.js?v=1.4.2}"></script>
+</div>
+
+<!-- jsonview格式化和语法高亮JSON格式数据查看插件 -->
+<div th:fragment="jsonview-css">
+    <link th:href="@{/ajax/libs/jsonview/jquery.jsonview.css?v=1.2.0}" rel="stylesheet"/>
+</div>
+<div th:fragment="jsonview-js">
+    <script th:src="@{/ajax/libs/jsonview/jquery.jsonview.js?v=1.2.0}"></script>
+</div>
+
+<!-- jquery.smartwizard表单向导插件 -->
+<div th:fragment="jquery-smartwizard-css">
+    <link th:href="@{/ajax/libs/smartwizard/smart_wizard_all.min.css?v=5.1.1}" rel="stylesheet"/>
+</div>
+<div th:fragment="jquery-smartwizard-js">
+    <script th:src="@{/ajax/libs/smartwizard/jquery.smartWizard.min.js?v=5.1.1}"></script>
+</div>
+
+<!-- ECharts百度统计图表插件 -->
+<div th:fragment="echarts-js">
+    <script th:src="@{/ajax/libs/report/echarts/echarts-all.min.js?v=4.2.1}"></script>
+</div>
+
+<!-- peity图表组合插件 -->
+<div th:fragment="peity-js">
+    <script th:src="@{/ajax/libs/report/peity/jquery.peity.min.js?v=2.0.3}"></script>
+</div>
+
+<!-- sparkline线状图插件 -->
+<div th:fragment="sparkline-js">
+    <script th:src="@{/ajax/libs/report/sparkline/jquery.sparkline.min.js?v=2.1.2}"></script>
+</div>
+
+<!-- 表格行拖拽插件 -->
+<div th:fragment="bootstrap-table-reorder-rows-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-rows/jquery.tablednd.js?v=1.0.3}"></script>
+</div>
+
+<!-- 表格列拖拽插件 -->
+<div th:fragment="bootstrap-table-reorder-columns-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js?v=5.3.5}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js?v=1.18.3}"></script>
+</div>
+
+<!-- 表格列宽拖动插件 -->
+<div th:fragment="bootstrap-table-resizable-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/resizable/jquery.resizableColumns.min.js?v=0.1.0}"></script>
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js?v=1.18.3}"></script>
+</div>
+
+<!-- 表格行内编辑插件 -->
+<div th:fragment="bootstrap-editable-css">
+    <link th:href="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-editable.css?v=1.5.1}" rel="stylesheet"/>
+</div>
+<div th:fragment="bootstrap-table-editable-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-editable.min.js?v=1.5.1}"></script>
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-table-editable.js?v=1.18.3}"></script>
+</div>
+
+<!-- 表格导出插件 -->
+<div th:fragment="bootstrap-table-export-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/tableExport.min.js?v=1.10.24}"></script>
+</div>
+
+<!-- 表格冻结列插件 -->
+<div th:fragment="bootstrap-table-fixed-columns-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/columns/bootstrap-table-fixed-columns.js?v=1.18.3}"></script>
+</div>
+
+<!-- 表格自动刷新插件 -->
+<div th:fragment="bootstrap-table-auto-refresh-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/auto-refresh/bootstrap-table-auto-refresh.js?v=1.18.3}"></script>
+</div>
+
+<!-- 表格打印插件 -->
+<div th:fragment="bootstrap-table-print-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/print/bootstrap-table-print.js?v=1.18.3}"></script>
+</div>
+
+<!-- 表格视图分页插件 -->
+<div th:fragment="bootstrap-table-custom-view-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/custom-view/bootstrap-table-custom-view.js?v=1.18.3}"></script>
+</div>
+<div th:fragment="features">
+	<features>
+	<div class="features">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-6 col-xs-12 fea-column-inner">
+					<div class="fea-box">
+						<div class="photo">
+							<img src="/assets/img/gift.png" alt="images" class="img-reponsive">
+						</div>
+						<p class="inform-ver2">
+							<span class="strong">今天的订单<br></span> 看看今天的交易
+						</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12 fea-column-inner">
+					<div class="fea-box">
+						<div class="photo">
+							<img src="/assets/img/fly.png" alt="images" class="img-reponsive">
+						</div>
+						<p class="inform-ver2">
+							<span class="strong">运费优惠<br></span> 上千种商品
+						</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12 fea-column-inner">
+					<div class="fea-box">
+						<div class="photo">
+							<img src="/assets/img/return.png" alt="images" class="img-reponsive">
+						</div>
+						<p class="inform-ver2">
+							<span class="strong">简便退换 <br></span> 所有出售的商品
+						</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12 fea-column-inner">
+					<div class="fea-box">
+						<div class="photo">
+							<img src="/assets/img/secu.png" alt="images" class="img-reponsive">
+						</div>
+						<p class="inform-ver2">
+							<span class="strong">更好的服务<br></span> 以最好的服务为荣
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</features>
+</div>
+
+<div th:fragment="pcfooter">
+		<div class="top-footer">
+			<div class="container">
+				<h1 class="heading-default">更好信誉的卖家和买家</h1>
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12 block-left">
+						<div class="block-footer">
+							<h2 class="heading-primary">最新消息</h2>
+							<p class="description-primary">
+
+							</p>
+						</div>
+						<div class="block-footer">
+							<h2 class="heading-primary">手机和平板电脑</h2>
+							<p class="description-primary">
+
+							</p>
+						</div>
+						<div class="block-footer no-padding-bottom">
+							<h2 class="heading-primary">电脑和笔记本电脑</h2>
+							<p class="description-primary">
+
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6 block-right">
+						<div class="block-footer">
+							<h2 class="heading-primary">电子产品</h2>
+							<p class="description-primary">
+
+							</p>
+						</div>
+						<div class="block-footer">
+							<h2 class="heading-primary">时尚</h2>
+							<p class="description-primary">
+
+							</p>
+						</div>
+						<div class="block-footer no-padding-bottom">
+							<h2 class="heading-primary">安全与方便</h2>
+							<p class="description-primary">
+
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="copyright">
+			<div class="container">
+				<span>© <a href="#" title="">老本行家电回收</a> - All Rights Reserved.</span>
+				<ul class="payment">
+					<li><a href="#"><img src="../../assets/img/paypal.png" alt="images" class="img-responsive"></a></li>
+					<li><a href="#"><img src="../../assets/img/visa.png" alt="images" class="img-responsive"></a></li>
+					<li><a href="#"><img src="../../assets/img/american.png" alt="images" class="img-responsive"></a></li>
+					<li><a href="#"><img src="../../assets/img/mastercard.png" alt="images" class="img-responsive"></a></li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+</div>

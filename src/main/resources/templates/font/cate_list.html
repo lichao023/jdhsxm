@@ -1,0 +1,78 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>商品分类列表</title>
+    <th:block th:include="include :: pccomhead" />
+</head>
+
+<body>
+    <header>
+        <th:block th:include="include :: pchead" />
+        <th:block th:include="include :: pcmenu3" />
+    </header>
+<!-- header end -->
+<section class="shop-list-v3-page">
+    <div class="container">
+        <div class="heading-sub">
+            <h3 class="pull-left">分类页面</h3>
+            <ul class="other-link-sub pull-right">
+                <li><a href="/">主页</a></li>
+                <li><a class="active" th:text="${category.name}"></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div class="widget-product-list">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="filter-block">
+                        <div class="filter-block-shop filter-cate">
+                            <div class="block-title">
+                                <h3>Categories</h3>
+                            </div>
+                            <div class="block-content">
+                                <ul>
+                                    <li class="active" th:each="categoryTwo:${categoryTwos}">
+                                        <a th:href="@{'/pc/search.html?search='+${categoryTwo.name}}" >[[${categoryTwo.name}]]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="filter-block bd">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="box box-view" >
+                                    <span>一共有[[${goodsCount}]]件商品</span>
+                                    <div class="button-view">
+                                        <span class="col"><i class="ion-ios-keypad fa-3a"></i></span>
+                                        <span class="list"><i class="icon-grid-4"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <th:block th:include="include :: goodsList" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->
+<!--<div th:include="common/features.html"/>-->
+<!--<footer th:include="common/footer.html"/>-->
+    <th:block th:include="include :: features" />
+    <th:block th:include="include :: pcfooter" />
+<script type="text/javascript" src="../../assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../assets/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="../../assets/js/slick.min.js"></script>
+<script type="text/javascript" src="../../assets/js/bootstrap-slider.min.js"></script>
+<script type="text/javascript" src="../../assets/js/main.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

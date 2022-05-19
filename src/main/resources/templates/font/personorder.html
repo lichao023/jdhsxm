@@ -1,0 +1,123 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>个人信息</title>
+    <th:block th:include="include :: pccomhead" />
+</head>
+<body>
+    <header>
+        <th:block th:include="include :: pchead" />
+        <th:block th:include="include :: pcmenu3" />
+    </header>
+<!-- header end -->
+<section class="checkout-page">
+    <div class="container">
+        <div class="heading-sub">
+            <div>
+                <a class="active" href="/pc/personInfo">个人信息</a>
+                <a class="active" href="/pc/goods">我的商品</a>
+                <a class="active" href="/pc/myBuyOrder.html">我的订单(买)</a>
+                <a class="active" href="/pc/mySeOrder.html">我的订单(卖)</a>
+            </div>
+            <ul class="other-link-sub pull-right">
+                <li><a href="/">主页</a></li>
+                <li><a class="active" href="#cart">我买的订单</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="">
+            <div class="checkout-cart-form">
+                <div class="row">
+                    <div class="col-md-10 col-sm-12">
+                        <table class="table shop_table">
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">我的订单</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="order_item" th:each="bought:${orderList}">
+                                    <td class="product-thumbnail"><a th:href="@{'/goods/detail/'+${bought.goodsId}}"><img th:src="${bought.goodsImg}" alt="images" class="img-responsive" width="100px" height="75px"></a></td>
+                                    <td class="product-name">
+                                        <a th:href="@{'/goods/detail/'+${bought.goodsId}}">[[${bought.goodsName}]]</a>
+                                    </td>
+                                    <td class="product-price">
+                                        <p class="price">￥[[${bought.goodsPrice}]]</p>
+                                    </td>
+                                    <td class="product-price">
+                                        <p class="price">[[${bought.buyCount}]]</p>
+                                    </td>
+                                    <td class="product-price product-subtotal" th:each="time:${bought.createTime}">
+                                        <p class="price">[[${#dates.format(time,'yyyy-MM-dd')}]]</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: features" />
+    <th:block th:include="include :: pcfooter" />
+</section>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+    <script th:src="@{/js/jquery.contextMenu.min.js}"></script>
+    <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script th:src="@{/ruoyi/js/ry-ui.js?v=4.7.3}"></script>
+    <script th:src="@{/ruoyi/js/common.js?v=4.7.3}"></script>
+    <script th:src="@{/ruoyi/index.js?v=20201208}"></script>
+    <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+<script type="text/javascript">
+
+    function editFront(item) {
+        var _readonly = $('.noread');
+        alert("确定要修改吗？");
+        _readonly.removeAttr("readonly");
+        $(item).attr("style","display:none");
+        $(".save").removeAttr("style");
+    }
+
+    function save() {
+        let _userId = $('input[name="userId"]').val();
+        let _username = $('input[name="username"]').val();
+        let _password = $('input[name="password"]').val();
+        let _email = $('input[name="email"]').val();
+        let _phone = $('input[name="phone"]').val();
+        let _realname = $('input[name="realname"]').val();
+        let _address = $('input[name="address"]').val();
+        var data = JSON.stringify( {
+            "userId":_userId,
+            "username": _username,
+            "password": _password,
+            "email": _email,
+            "phone":_phone,
+            "realname":_realname,
+            "address":_address
+        });
+        $.ajax({
+            url: '/pc/updateUser',
+            type: 'post',
+            data: data,
+            headers: {"token": storage.get("hstoken")},
+            contentType: "application/json;charset=UTF-8",
+            dataType:'json',
+            success:function (data) {
+                if (data.code == 0){
+                    $.modal.msg(data.msg);
+                }else {
+                    $.modal.msg(data.msg);
+                }
+                $.modal.closeLoading();
+                window.location.reload();
+            }
+        })
+    }
+</script>
+</body>
+</html>

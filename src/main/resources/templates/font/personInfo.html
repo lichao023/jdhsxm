@@ -1,0 +1,147 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>个人信息</title>
+    <th:block th:include="include :: pccomhead" />
+</head>
+<body>
+    <header>
+        <th:block th:include="include :: pchead" />
+        <th:block th:include="include :: pcmenu3" />
+    </header>
+<!-- header end -->
+<section class="checkout-page">
+    <div class="container">
+        <div class="heading-sub">
+            <div>
+                <a class="active" href="/pc/personInfo">个人信息</a>
+                <a class="active" href="/pc/goods">我的商品</a>
+                <a class="active" href="/pc/myBuyOrder.html">我的订单(买)</a>
+                <a class="active" href="/pc/mySeOrder.html">我的订单(卖)</a>
+            </div>
+            <ul class="other-link-sub pull-right">
+                <li><a href="/">主页</a></li>
+                <li><a class="active" href="#cart">个人信息</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="billing-details">
+                        <div class="billing-details-heading">
+                            <h2 class="billing-title" style="padding-bottom: 30px;">
+                                个人信息
+                            </h2>
+                        </div>
+                        <div class="billing-details-content">
+                            <input type="hidden" name="userId" id="userId" th:value="${user.userId}"/>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 col-xs-12">
+                                        <strong>用户名：</strong>
+                                        <input type="text" name="username" class="form-control noread" th:value="${user.userName}" readonly="readonly">
+                                    </div>
+                                    <div class="col-md-3 col-xs-12">
+                                        <strong>密码：</strong>
+                                        <input type="password" name="password" class="form-control noread" th:value="${user.password}" readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4 col-xs-12">
+                                        <strong>手机号码</strong>
+                                        <input type="text" name="phone" class="form-control noread" th:value="${user.phone}" readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-2 col-xs-12">
+                                        <strong>姓名：</strong>
+                                        <input type="text" name="realName" class="form-control noread" th:value="${user.realName}" readonly="readonly">
+                                    </div>
+                                    <div class="col-md-8 col-xs-12">
+                                        <strong>详细地址：</strong>
+                                        <input type="text" name="address" class="form-control noread" th:value="${user.address}" readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          <button class="btn-checkout edit" id="editInfo" onclick="editFront(this)"><strong>编辑</strong></button>
+                          <button class="btn-checkout save" id="saveInfo" onclick="save()" style="display: none"><strong>保存</strong></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--<div th:include="common/features.html"/>
+<footer th:include="common/footer.html"/>-->
+    <th:block th:include="include :: features" />
+    <th:block th:include="include :: pcfooter" />
+<!--<script type="text/javascript" src="../../assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../assets/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="../../assets/js/slick.min.js"></script>
+<script type="text/javascript" src="../../assets/js/main.js"></script>-->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+    <script th:src="@{/js/jquery.contextMenu.min.js}"></script>
+    <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script th:src="@{/ruoyi/js/ry-ui.js?v=4.7.3}"></script>
+    <script th:src="@{/ruoyi/js/common.js?v=4.7.3}"></script>
+    <script th:src="@{/ruoyi/index.js?v=20201208}"></script>
+    <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+<script type="text/javascript">
+
+    function editFront(item) {
+        var _readonly = $('.noread');
+        alert("确定要修改吗？");
+        _readonly.removeAttr("readonly");
+        $(item).attr("style","display:none");
+        $(".save").removeAttr("style");
+    }
+
+    function save() {
+        let _userId = $('input[name="userId"]').val();
+        let _username = $('input[name="username"]').val();
+        let _password = $('input[name="password"]').val();
+        let _email = $('input[name="email"]').val();
+        let _phone = $('input[name="phone"]').val();
+        let _realname = $('input[name="realname"]').val();
+        let _address = $('input[name="address"]').val();
+        var data = JSON.stringify( {
+            "userId":_userId,
+            "username": _username,
+            "password": _password,
+            "email": _email,
+            "phone":_phone,
+            "realname":_realname,
+            "address":_address
+        });
+        $.ajax({
+            url: '/pc/updateUser',
+            type: 'post',
+            data: data,
+            headers: {"token": storage.get("hstoken")},
+            contentType: "application/json;charset=UTF-8",
+            dataType:'json',
+            success:function (data) {
+                if (data.code == 0){
+                    $.modal.msg(data.msg);
+                }else {
+                    $.modal.msg(data.msg);
+                }
+                $.modal.closeLoading();
+                window.location.reload();
+            }
+        })
+    }
+</script>
+</body>
+</html>

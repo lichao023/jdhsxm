@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jdhs.project.system.fenlei.mapper.FontGoodsFenleiMapper">
+    
+    <resultMap type="FontGoodsFenlei" id="FontGoodsFenleiResult">
+        <result property="id"    column="id"    />
+        <result property="grade"    column="grade"    />
+        <result property="name"    column="name"    />
+        <result property="pid"    column="pid"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFontGoodsFenleiVo">
+        select id, grade, name, pid, del_flag, create_by, create_time, update_by, update_time, remark from font_goods_fenlei
+    </sql>
+
+    <select id="selectFontGoodsFenleiList" parameterType="FontGoodsFenlei" resultMap="FontGoodsFenleiResult">
+        <include refid="selectFontGoodsFenleiVo"/>
+        <where>  
+            <if test="grade != null "> and grade = #{grade}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+        </where>
+    </select>
+    
+    <select id="selectFontGoodsFenleiById" parameterType="Long" resultMap="FontGoodsFenleiResult">
+        <include refid="selectFontGoodsFenleiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFontGoodsFenlei" parameterType="FontGoodsFenlei" useGeneratedKeys="true" keyProperty="id">
+        insert into font_goods_fenlei
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="grade != null">grade,</if>
+            <if test="name != null">name,</if>
+            <if test="pid != null">pid,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="grade != null">#{grade},</if>
+            <if test="name != null">#{name},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFontGoodsFenlei" parameterType="FontGoodsFenlei">
+        update font_goods_fenlei
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="grade != null">grade = #{grade},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFontGoodsFenleiById" parameterType="Long">
+        delete from font_goods_fenlei where id = #{id}
+    </delete>
+
+    <delete id="deleteFontGoodsFenleiByIds" parameterType="String">
+        delete from font_goods_fenlei where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectFontGoodsFenleiByName" parameterType="String">
+        delete from font_goods_fenlei where name = #{name} limit 1
+    </select>
+
+</mapper>

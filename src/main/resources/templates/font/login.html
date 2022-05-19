@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>家电回收平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="../../assets/metronic/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="../../assets/metronic/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="../../assets/metronic/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="../../assets/metronic/pages/css/login-4.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+
+<body class=" login">
+<!-- BEGIN LOGO -->
+<div class="logo">
+    <a href="/">
+        <img th:src="@{/assets/xximg/title.jpg}" alt="" /> </a>
+</div>
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div class="content" style="background: url('/static/assets/metronic/pages/img/bg-white-lock.png')">
+    <!-- BEGIN LOGIN FORM -->
+    <form class="login-form">
+        <h3 class="form-title">登录</h3>
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">用户名</label>
+            <div class="input-icon">
+                <i class="fa fa-user"></i>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" id="username" placeholder="用户名" name="username" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">密码</label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                <input class="form-control placeholder-no-fix" id="password" type="password" autocomplete="off" placeholder="密码" name="password" />
+            </div>
+        </div>
+        <div class="form-actions">
+            <label class="rememberme mt-checkbox mt-checkbox-outline">
+                <input type="checkbox" checked="checked" name="remember" value="1" /> 记住我
+                <span></span>
+            </label>
+            <button type="button" class="btn green pull-right" onclick="login()"> 登录 </button>
+        </div>
+        <div class="create-account">
+            <p> 没有一个账号？&nbsp;
+                <a href="/register.html" id="register-btn"> 注册 </a>
+            </p>
+        </div>
+    </form>
+    <!-- END LOGIN FORM -->
+</div>
+<!-- END LOGIN -->
+<!-- BEGIN COPYRIGHT -->
+<div class="copyright"> 2022 &copy; Xx - jdhs website. </div>
+<!-- END COPYRIGHT -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+    <script th:src="@{/js/jquery.contextMenu.min.js}"></script>
+    <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script th:src="@{/ruoyi/js/ry-ui.js?v=4.7.3}"></script>
+    <script th:src="@{/ruoyi/js/common.js?v=4.7.3}"></script>
+    <script th:src="@{/ruoyi/index.js?v=20201208}"></script>
+    <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+
+    <script type="application/javascript">
+        function login() {
+            $.modal.loading($("#btnSubmit").data("loading"));
+            var username = $.common.trim($("input[name='username']").val());
+            var password = $.common.trim($("input[name='password']").val());
+            var data = JSON.stringify({'userName':username,'password':password});
+            $.ajax({
+                type: "post",
+                dataType: "JSON",
+                contentType: "application/json;charset=UTF-8",
+                url: "/pclogin",
+                data: data,
+                success: function(res) {
+                    if(res.code == 0){
+                        storage.set("hstoken",res.msg);
+                        console.log(storage.get("hstoken")+"-------------");
+                        window.location.href = "/index.html";
+
+                    }else {
+                        $.modal.msg(res.msg);
+                        $.modal.closeLoading();
+                    }
+
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

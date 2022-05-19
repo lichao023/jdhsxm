@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jdhs.project.system.banner.mapper.FontBannerMapper">
+    
+    <resultMap type="FontBanner" id="FontBannerResult">
+        <result property="id"    column="id"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="sellerId"    column="seller_id"    />
+        <result property="bannerName"    column="banner_name"    />
+        <result property="bannerPrice"    column="banner_price"    />
+        <result property="bannerDetail"    column="banner_detail"    />
+        <result property="bannerNumber"    column="banner_number"    />
+        <result property="img1"    column="img1"    />
+        <result property="img2"    column="img2"    />
+        <result property="img3"    column="img3"    />
+        <result property="sellStatus"    column="sell_status"    />
+        <result property="created"    column="created"    />
+        <result property="updated"    column="updated"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFontBannerVo">
+        select id, category_id, seller_id, banner_name, banner_price, banner_detail, banner_number, img1, img2, img3, sell_status, created, updated, del_flag, create_by, create_time, update_by, update_time, remark from font_banner
+    </sql>
+
+    <select id="selectFontBannerList" parameterType="FontBanner" resultMap="FontBannerResult">
+        <include refid="selectFontBannerVo"/>
+        <where>  
+            <if test="categoryId != null "> and category_id = #{categoryId}</if>
+            <if test="sellerId != null "> and seller_id = #{sellerId}</if>
+            <if test="bannerName != null  and bannerName != ''"> and banner_name like concat('%', #{bannerName}, '%')</if>
+            <if test="bannerPrice != null "> and banner_price = #{bannerPrice}</if>
+            <if test="bannerDetail != null  and bannerDetail != ''"> and banner_detail = #{bannerDetail}</if>
+            <if test="bannerNumber != null "> and banner_number = #{bannerNumber}</if>
+            <if test="img1 != null  and img1 != ''"> and img1 = #{img1}</if>
+            <if test="img2 != null  and img2 != ''"> and img2 = #{img2}</if>
+            <if test="img3 != null  and img3 != ''"> and img3 = #{img3}</if>
+            <if test="sellStatus != null "> and sell_status = #{sellStatus}</if>
+            <if test="created != null "> and created = #{created}</if>
+            <if test="updated != null "> and updated = #{updated}</if>
+        </where>
+    </select>
+    
+    <select id="selectFontBannerById" parameterType="Long" resultMap="FontBannerResult">
+        <include refid="selectFontBannerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFontBanner" parameterType="FontBanner">
+        insert into font_banner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="categoryId != null">category_id,</if>
+            <if test="sellerId != null">seller_id,</if>
+            <if test="bannerName != null">banner_name,</if>
+            <if test="bannerPrice != null">banner_price,</if>
+            <if test="bannerDetail != null">banner_detail,</if>
+            <if test="bannerNumber != null">banner_number,</if>
+            <if test="img1 != null">img1,</if>
+            <if test="img2 != null">img2,</if>
+            <if test="img3 != null">img3,</if>
+            <if test="sellStatus != null">sell_status,</if>
+            <if test="created != null">created,</if>
+            <if test="updated != null">updated,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="sellerId != null">#{sellerId},</if>
+            <if test="bannerName != null">#{bannerName},</if>
+            <if test="bannerPrice != null">#{bannerPrice},</if>
+            <if test="bannerDetail != null">#{bannerDetail},</if>
+            <if test="bannerNumber != null">#{bannerNumber},</if>
+            <if test="img1 != null">#{img1},</if>
+            <if test="img2 != null">#{img2},</if>
+            <if test="img3 != null">#{img3},</if>
+            <if test="sellStatus != null">#{sellStatus},</if>
+            <if test="created != null">#{created},</if>
+            <if test="updated != null">#{updated},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFontBanner" parameterType="FontBanner">
+        update font_banner
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="sellerId != null">seller_id = #{sellerId},</if>
+            <if test="bannerName != null">banner_name = #{bannerName},</if>
+            <if test="bannerPrice != null">banner_price = #{bannerPrice},</if>
+            <if test="bannerDetail != null">banner_detail = #{bannerDetail},</if>
+            <if test="bannerNumber != null">banner_number = #{bannerNumber},</if>
+            <if test="img1 != null">img1 = #{img1},</if>
+            <if test="img2 != null">img2 = #{img2},</if>
+            <if test="img3 != null">img3 = #{img3},</if>
+            <if test="sellStatus != null">sell_status = #{sellStatus},</if>
+            <if test="created != null">created = #{created},</if>
+            <if test="updated != null">updated = #{updated},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFontBannerById" parameterType="Long">
+        delete from font_banner where id = #{id}
+    </delete>
+
+    <delete id="deleteFontBannerByIds" parameterType="String">
+        delete from font_banner where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

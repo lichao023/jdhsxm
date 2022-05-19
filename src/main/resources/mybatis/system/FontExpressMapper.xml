@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jdhs.project.system.express.mapper.FontExpressMapper">
+    
+    <resultMap type="FontExpress" id="FontExpressResult">
+        <result property="id"    column="id"    />
+        <result property="expressName"    column="express_name"    />
+        <result property="expressPrice"    column="express_price"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFontExpressVo">
+        select id, express_name, express_price, del_flag, create_by, create_time, update_by, update_time from font_express
+    </sql>
+
+    <select id="selectFontExpressList" parameterType="FontExpress" resultMap="FontExpressResult">
+        <include refid="selectFontExpressVo"/>
+        <where>  
+            <if test="expressName != null  and expressName != ''"> and express_name like concat('%', #{expressName}, '%')</if>
+            <if test="expressPrice != null "> and express_price = #{expressPrice}</if>
+        </where>
+    </select>
+    
+    <select id="selectFontExpressById" parameterType="Long" resultMap="FontExpressResult">
+        <include refid="selectFontExpressVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFontExpress" parameterType="FontExpress" useGeneratedKeys="true" keyProperty="id">
+        insert into font_express
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="expressName != null">express_name,</if>
+            <if test="expressPrice != null">express_price,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="expressName != null">#{expressName},</if>
+            <if test="expressPrice != null">#{expressPrice},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFontExpress" parameterType="FontExpress">
+        update font_express
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="expressName != null">express_name = #{expressName},</if>
+            <if test="expressPrice != null">express_price = #{expressPrice},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFontExpressById" parameterType="Long">
+        delete from font_express where id = #{id}
+    </delete>
+
+    <delete id="deleteFontExpressByIds" parameterType="String">
+        delete from font_express where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

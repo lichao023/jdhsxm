@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>闲闲二手交易网站</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Preview page of Metronic Admin Theme #1 for " name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="../../assets/metronic/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/metronic/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="../../assets/metronic/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="../../assets/metronic/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="../../assets/metronic/pages/css/login-4.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" /> </head>
+<!-- END HEAD -->
+
+<body class=" login">
+<!-- BEGIN LOGO -->
+<div class="logo">
+    <a href="index.html">
+        <img src="../../assets/xximg/title.jpg" alt="" /> </a>
+</div>
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div class="content" style="background: url('../../assets/metronic/pages/img/bg-white-lock.png')">
+    <form class="register-form" action="/register" method="post" onsubmit="return verifyRegister()">
+        <h3>注册</h3>
+        <p> 请输入你的个人信息: </p>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">用户类型</label>
+            <label class="radio-box"> <input type="radio" checked name="userType" value="1" /> 居民用户 </label>
+            <label class="radio-box"> <input type="radio" name="userType" value="2" /> 回收商 </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">姓名</label>
+            <div class="input-icon">
+                <i class="fa fa-font"></i>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="姓名" name="realName" /> </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">地址</label>
+            <div class="input-icon">
+                <i class="fa fa-font"></i>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="地址" name="address" /> </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">电话</label>
+            <div class="input-icon">
+                <i class="fa fa-font"></i>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="电话" name="phone" /> </div>
+        </div>
+        <p style="margin-top: 50px"> 请输入你的账号信息: </p>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">用户名</label>
+            <div class="input-icon">
+                <i class="fa fa-user"></i>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="userName" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">密码</label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="密码" name="password" /> </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">确认密码</label>
+            <div class="controls">
+                <div class="input-icon">
+                    <i class="fa fa-check"></i>
+                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="确认密码" name="repassword" id="register_repassword" /> </div>
+            </div>
+        </div>
+        <div class="form-group" id="qymc" style="display: none">
+            <label class="control-label visible-ie8 visible-ie9">企业名称</label>
+            <div class="input-icon">
+                <i class="fa fa-user"></i>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="企业名称" name="qymc" />
+            </div>
+        </div>
+        <div class="form-group" id="tydm" style="display: none">
+            <label class="control-label visible-ie8 visible-ie9">社会统一信用代码</label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="社会统一信用代码" name="tydm" /> </div>
+        </div>
+        <div class="form-group">
+            <label class="mt-checkbox mt-checkbox-outline">
+                <input type="checkbox" checked="checked" name="tnc" /> 我已阅读并同意相关
+                <a href="javascript:;">服务条款 </a> 和
+                <a href="javascript:;">隐私政策 </a>
+                <span></span>
+            </label>
+            <div id="register_tnc_error"> </div>
+        </div>
+        <div class="form-actions">
+            <a href="/" class="btn red btn-outline"> 首页 </a>
+            <button type="button" onclick="register()" class="btn green pull-right"> 注册 </button>
+        </div>
+    </form>
+</div>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+    <script th:src="@{/js/jquery.contextMenu.min.js}"></script>
+    <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script th:src="@{/ruoyi/js/ry-ui.js?v=4.7.3}"></script>
+    <script th:src="@{/ruoyi/js/common.js?v=4.7.3}"></script>
+    <script th:src="@{/ruoyi/index.js?v=20201208}"></script>
+    <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+
+    <script type="application/javascript">
+
+        $('input[type=radio][name=userType]').change(function() {
+            var userType = this.value;
+            if (userType == "1") {
+                $("#qymc").hide();
+                $("#tydm").hide();
+            } else if (userType == "2") {
+                $("#qymc").show();
+                $("#tydm").show();
+            }
+        });
+
+        function register(){
+            //获取用户信息
+            var username = $.common.trim($("input[name='userName']").val());
+            var password = $.common.trim($("input[name='password']").val());
+            var address = $.common.trim($("input[name='address']").val());
+            var phone = $.common.trim($("input[name='phone']").val());
+            var realName = $.common.trim($("input[name='realName']").val());
+            var qymc = $.common.trim($("input[name='qymc']").val());
+            var userType = $("input[type='radio']:checked").val();
+            var tydm = $.common.trim($("input[name='tydm']").val());
+            var data = JSON.stringify({'userType':userType,'qymc':qymc,'tydm':tydm,'userName':username,'password':password,'realName':realName,'address':address,'phone':phone});
+            $.ajax({
+                type: "post",
+                dataType: "JSON",
+                contentType: "application/json;charset=UTF-8",
+                url: "/pc/register",
+                data: data,
+                success: function(res) {
+                    if(res.code == 0){
+                        window.location.href = "/pclogin.html";
+                    }else {
+                        $.modal.msg(res.msg);
+                        $.modal.closeLoading();
+                    }
+                }
+            });
+        }
+    </script>
+<script>
+    var currCode
+    /**
+     * 发送验证码
+     */
+    function sendCode() {
+
+        // 手机号验证正则表达式
+        var phoneReg = /^1[0-9]{10}$/
+
+        var phone = $("#phone")
+
+        // 验证手机号
+        if (!phoneReg.test(phone.val().trim())) {
+            alert('手机号格式错误')
+            return
+        } else if (verPhone()) {
+            alert('手机号已存在')
+            return
+        }
+
+        $(this).attr("disabled",true); //防止多次点击
+
+        // 开始计时
+        timeCount();
+
+        // 获取验证码
+        $.get({
+            url: '/sendCode/' + phone.val(),
+            success: function (data) {
+                currCode = data
+            }
+        })
+        /**
+         * 计时函数
+         **/
+        var ordertime = 30
+        var timeleft = ordertime
+        function timeCount () {
+            timeleft -= 1
+            let btn = $("#code")
+            if (timeleft > 0){
+                btn.html("重发(" + timeleft + ")");
+                setTimeout(timeCount,1000)
+            }
+            else {
+                btn.html("重新发送");
+                timeleft = ordertime   //重置等待时间
+                btn.removeAttr("disabled");
+            }
+        }
+    }
+
+    /**
+     * 验证手机号是否已注册
+     **/
+    function verPhone() {
+        var phone = $("#phone").val()
+        var flag = false
+        // 同步请求
+        $.get({
+            url: '/verPhone/' + phone,
+            async: false,
+            success: function (data) {
+                flag = data
+            }
+        })
+        return flag
+    }
+    /**
+     * 注册
+     */
+    function verifyRegister() {
+        var phone = $("#phone").val()
+        var code = $("#codeVal").val()
+        var password = $("#register_password").val()
+        var rePassword = $("#register_repassword").val()
+
+        var phoneReg = /^1[0-9]{10}$/
+
+        // 验证
+        if (!phoneReg.test(phone)) {
+            alert("手机号格式错误")
+            return false
+        } else if (verPhone()) {
+            alert("手机号已存在")
+            return false
+        }
+        else if (code == "") {
+            alert("验证码不能为空")
+            return false
+        } else if (code != currCode) {
+            alert("验证码错误")
+            return false
+        } else if (password == "") {
+            alert("密码不能为空")
+            return false
+        } else if (rePassword == "") {
+            alert("重复密码不能为空")
+            return false
+        } else if (password != rePassword) {
+            alert("两次密码输入不一致")
+            return false
+        }
+        return true
+    }
+
+</script>
+</body>
+</html>
